@@ -20,6 +20,23 @@
     <% end %>
   </tbody>
 </table>
-  
 
-  
+<h1>New book</h1>
+<% if @book.errors.any? %>
+  <%= @book.errors.count %>errors prohibited this book from being saved:
+  <ul>
+    <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with model: @book, url: '/books', method: :post do |f| %>
+  <p>Title</p>
+  <%= f.text_field :title %>
+
+  <p>Body</p>
+  <%= f.text_area :body %>
+  <br>
+  <%= f.submit 'Create Book' %>
+<% end %>
